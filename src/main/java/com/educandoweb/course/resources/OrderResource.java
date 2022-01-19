@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.educandoweb.course.entities.User;
-import com.educandoweb.course.services.UserService;
+import com.educandoweb.course.entities.Order;
+import com.educandoweb.course.services.OrderService;
 
 @RestController  //indicar que é o rest é controlado por um controller
-@RequestMapping(value = "/users") //caminho do recurso
-public class UserResource {
+@RequestMapping(value = "/orders") //caminho do recurso
+public class OrderResource {
 
 	@Autowired
-	private UserService service;
+	private OrderService service;
 	
 	@GetMapping 
-	public ResponseEntity<List<User>> findAll(){   //Response tipo especifico do spring para retornar resposta de requisiçoes web
-		List<User> list = service.findAll();       //busca todos user passando uma lista de user
+	public ResponseEntity<List<Order>> findAll(){   //Response tipo especifico do spring para retornar resposta de requisiçoes web
+		List<Order> list = service.findAll();       //busca todos user passando uma lista de order
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id){ //buscar user por id
-		User obj = service.findById(id);
+	public ResponseEntity<Order> findById(@PathVariable Long id){ //buscar user por id
+		Order obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
