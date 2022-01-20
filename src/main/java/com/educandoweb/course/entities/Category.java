@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_category")
 public class Category implements Serializable{
@@ -24,6 +26,7 @@ public class Category implements Serializable{
 	
 	//@Transient anotação para o jpa nao reconhecer e nao fazer o mapeamento
 	//set é uma interface e por isso nao pode ser instanciada, por isso o hashSet
+	@JsonIgnore
 	@ManyToMany(mappedBy = "categories") //mapeado por categories da coleçao product
 	private Set<Product> products = new HashSet<>();
 	
