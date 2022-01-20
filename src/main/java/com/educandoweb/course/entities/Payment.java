@@ -12,16 +12,19 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_payment")
 public class Payment implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Instant moment;
-
+	
 	@OneToOne //so da para realizar um pagamento se houver um pedido, mas não preciso do pagamento para haver um pedido
 	@MapsId
 	private Order order;
