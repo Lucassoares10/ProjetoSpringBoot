@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.educandoweb.course.entities.enums.OrderStatus;
@@ -39,6 +41,10 @@ public class Order implements Serializable{
 	
 	@OneToMany(mappedBy = "id.order") //id.order porque no orderItem eu tenho o id e o id é que tem o pedido
 	private Set<OrderItem> items = new HashSet<>(); //Ter um get Itens associados ao OrderItem(item de pedido) relacionado ao pedido
+	
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)// no caso do um para um, nos estamos mapeando as duas entidades para ter o mesmo id
+	//se o pedido for id numero 5 o pagamento tambem sera com id 5, e nesse caso de mapear relação de um para um com o mesmo id, o cascade = CascadeType.ALL) é obrigatorio 
+	private Payment payment;
 	
 	public Order(){
 	}
@@ -87,6 +93,14 @@ public class Order implements Serializable{
 	
 	public Set<OrderItem> getItems(){
 		return items;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 
 	@Override
