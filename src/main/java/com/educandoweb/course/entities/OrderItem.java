@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.educandoweb.course.entities.pk.OrderItemPk;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_order_item")
@@ -15,7 +16,7 @@ public class OrderItem  implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId   //pegar o id o OrdemItemPk que sera gerado e transforma-lo no id do OrdemItem na tabela do banco
-	private OrderItemPk id;
+	private OrderItemPk id = new OrderItemPk(); //sempre que for criar uma classe auxiliar que é um id composto, voce deve instanciar-lo
 	
 	private Integer quantity;
 	private Double price;
@@ -34,6 +35,7 @@ public class OrderItem  implements Serializable{
 		this.price = price;
 	}
 	
+	@JsonIgnore //porque é o get que chama o id do order, ai o item de pedido fica chamando o pedido novamente, entrando em um loop
 	public Order getOrder() {
 		return id.getOrder();
 	}
