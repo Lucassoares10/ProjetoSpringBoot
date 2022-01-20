@@ -35,7 +35,7 @@ public class OrderItem  implements Serializable{
 		this.price = price;
 	}
 	
-	@JsonIgnore //porque é o get que chama o id do order, ai o item de pedido fica chamando o pedido novamente, entrando em um loop
+	
 	public Order getOrder() {
 		return id.getOrder();
 	}
@@ -44,6 +44,7 @@ public class OrderItem  implements Serializable{
 		id.setOrder(order);
 	}
 	
+	@JsonIgnore
 	public Product getProduct() {
 		return id.getProduct();
 	}
