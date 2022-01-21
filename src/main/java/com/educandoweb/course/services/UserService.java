@@ -13,7 +13,7 @@ import com.educandoweb.course.repositories.UserRepository;
 public class UserService {
 
 	@Autowired
-	private UserRepository repository;
+	private UserRepository repository; //para utilizarmos o repository mais a frente.
 	
 	public List<User> findAll(){
 		return repository.findAll();
@@ -26,6 +26,10 @@ public class UserService {
 	
 	public User insert(User obj) { //pegando o usuario e salvando com o repository
 		return repository.save(obj);
+	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
 	}
 }
  
