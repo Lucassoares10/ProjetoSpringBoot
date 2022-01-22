@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 
 @Service    //faz a mesmo que o component para registrar a dependencia
 public class UserService {
@@ -15,13 +16,15 @@ public class UserService {
 	@Autowired
 	private UserRepository repository; //para utilizarmos o repository mais a frente.
 	
+	//buscar todos users
 	public List<User> findAll(){
 		return repository.findAll();
 	}
 	
+	//buscar users por id
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(()-> new ResourceNotFoundException(id)); // tenta da o get caso n tenha retorno, da a exceção feita em expressao lambda
 	}
 	
 	public User insert(User obj) { //pegando o usuario e salvando com o repository
