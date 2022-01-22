@@ -22,4 +22,12 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
+	
+	@ExceptionHandler(DataBaseException.class) //para todas exceptions sobre data base o spring ira rodar este metodo para retorno
+	public ResponseEntity<StandardError> resourceNotFound(DataBaseException e, HttpServletRequest request){
+		String error = "Data base error";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(),request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
 }
