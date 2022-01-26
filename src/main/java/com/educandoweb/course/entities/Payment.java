@@ -26,7 +26,7 @@ public class Payment implements Serializable{
 	private Instant moment;
 	
 	@OneToOne //so da para realizar um pagamento se houver um pedido, mas não preciso do pagamento para haver um pedido
-	@MapsId
+	@MapsId //é usado para identificar que a entidade é mapeada pelo @ManyToOne ou @OneToMany
 	private Order order;
 	
 	public Payment() {
